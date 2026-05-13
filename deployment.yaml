@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-api
+  template:
+    metadata:
+      labels:
+        app: weather-api
+    spec:
+      containers:
+      - name: weather-api
+        # Replace with your actual ECR URI from last night
+        image: 525987623219.dkr.ecr.us-east-1.amazonaws.com/weather-api:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: weather-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
