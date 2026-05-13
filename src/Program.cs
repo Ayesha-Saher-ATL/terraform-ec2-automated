@@ -8,8 +8,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || true) // Always enable for testing
-
+// Added "|| true" to ensure Swagger GUI loads in your AWS Production environment
+if (app.Environment.IsDevelopment() || true) 
+{
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -23,7 +24,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
