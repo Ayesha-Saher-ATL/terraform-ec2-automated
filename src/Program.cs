@@ -8,7 +8,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || true) // Always enable for testing{
+if (app.Environment.IsDevelopment() || true) // Always enable for testing
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
